@@ -9,27 +9,17 @@ sap.ui.define([
             this._setIceCreamModel();
         },
 
-        _setIceCreamModel:function(){
+        _setIceCreamModel:async function(){
 
-            var aData = {
-                Items : [
-                    {
-                        Name: "useless",
-                        Number: 2
-                    },
-                    {
-                        Name: "success",
-                        Number: 80
-                    },
-                    {
-                        Name: "failed",
-                        Number: 18
-                    }
-                ]
-            }
-            var oIceCreamModel = new sap.ui.model.json.JSONModel();
-            oIceCreamModel.setData(aData);
-            this.getView().setModel(oIceCreamModel, "IceCreamModel");
+            var model = new sap.ui.model.json.JSONModel();
+            await model.loadData("sources/data/ServiceData.json");
+
+            console.log(model.getJSON())
+
+            let ac4yService = new Ac4yService(0).rebuilded(model.getJSON());
+            this.getView().setModel(model, "service");
+
+            console.log(ac4yService)
         }
 
     });
