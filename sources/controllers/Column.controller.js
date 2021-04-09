@@ -14,9 +14,10 @@ sap.ui.define([
             var model = new sap.ui.model.json.JSONModel();
             await model.loadData("sources/data/ServiceData.json");
 
+            let deseralized = JSON.parse(model.getJSON())
             console.log(model.getJSON())
 
-            let ac4yService = new Ac4yService(0).rebuilded(model.getJSON());
+            let ac4yService = new Ac4yService(0).rebuilded(deseralized);
             this.getView().setModel(model, "service");
 
             console.log(ac4yService)
